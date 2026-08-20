@@ -5,6 +5,25 @@
   "generatedAt": "2026-08-20",
   "plugins": [
     {
+      "name": "dsh-universal-attachments",
+      "displayName": "dsh-airdrop",
+      "version": "0.1.1",
+      "kind": "dsh-plugin",
+      "source": "github:demacia1314/dsh-airdrop",
+      "sourceUrl": "https://github.com/demacia1314/dsh-airdrop",
+      "resolvedTarball": "https://codeload.github.com/demacia1314/dsh-airdrop/tar.gz/05e6b924764f8ab6561467dbecff12978fd4940c",
+      "commit": "05e6b924764f8ab6561467dbecff12978fd4940c",
+      "license": "MIT",
+      "installCommand": "dsh plugin --profile desktop add github:demacia1314/dsh-airdrop",
+      "installedAt": [
+        {
+          "harnessHome": "~/.dsh",
+          "profile": "desktop"
+        }
+      ],
+      "description": "Drag-and-drop file/folder upload to anywhere in the DSH window; works over remote sessions too. Repo named dsh-airdrop, package name dsh-universal-attachments."
+    },
+    {
       "name": "dsh-better-sidebar",
       "version": "0.14.0",
       "kind": "dsh-plugin",

@@ -8,13 +8,15 @@
 
 | # | 名称 | 版本 | 来源 | 类型 | 安装位置 |
 |---|------|------|------|------|----------|
-| 1 | `dsh-better-sidebar` | 0.14.0 | [github:omdsh-dev/DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) · commit `6c89151` | DSH 桌面版插件 | `~/.dsh/profiles/desktop` |
-| 2 | `archify` | 2.15.0 | [github:tt-a1i/archify](https://github.com/tt-a1i/archify) · commit `82e63c9` | DSH 网页版插件（Agent Skill，架构图渲染） | `~/.local/share/ai.deepseek.harness.desk/harness/profiles/web` |
-| 3 | `dsh-plugin-desktop`（DSH Desktop 桌面应用本体） | 2.0.1 | [github:anywhere-labs/deepseek-harness-desktop](https://github.com/anywhere-labs/deepseek-harness-desktop) · 安装包 `DSH-Desktop-2.0.1-amd64.deb` | Electron 桌面壳（Cordis 插件形态） | `~/.local/opt/DSH Desktop`（deb 安装） |
-| 4 | `@deepseek-ai/dsh`（dsh CLI） | 0.1.0-rc.7 | npm: `@deepseek-ai/dsh` | dsh 命令行工具 | `~/.local/lib/node_modules/@deepseek-ai/dsh`（npm 全局） |
+| 1 | `dsh-universal-attachments`（dsh-airdrop） | 0.1.1 | [github:demacia1314/dsh-airdrop](https://github.com/demacia1314/dsh-airdrop) · commit `05e6b92` | 附件拖拽上传插件 | `~/.dsh/profiles/desktop` |
+| 2 | `dsh-better-sidebar` | 0.14.0 | [github:omdsh-dev/DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) · commit `6c89151` | DSH 桌面版插件 | `~/.dsh/profiles/desktop` |
+| 3 | `archify` | 2.15.0 | [github:tt-a1i/archify](https://github.com/tt-a1i/archify) · commit `82e63c9` | DSH 网页版插件（Agent Skill，架构图渲染） | `~/.local/share/ai.deepseek.harness.desk/harness/profiles/web` |
+| 4 | `dsh-plugin-desktop`（DSH Desktop 桌面应用本体） | 2.0.1 | [github:anywhere-labs/deepseek-harness-desktop](https://github.com/anywhere-labs/deepseek-harness-desktop) · 安装包 `DSH-Desktop-2.0.1-amd64.deb` | Electron 桌面壳（Cordis 插件形态） | `~/.local/opt/DSH Desktop`（deb 安装） |
+| 5 | `@deepseek-ai/dsh`（dsh CLI） | 0.1.0-rc.7 | npm: `@deepseek-ai/dsh` | dsh 命令行工具 | `~/.local/lib/node_modules/@deepseek-ai/dsh`（npm 全局） |
 
 ## 各插件简介
 
+- **dsh-universal-attachments (dsh-airdrop)** — 把文件/文件夹拖拽到 DSH 窗口任意位置即可上传为会话附件；远程（SSH 隧道）访问时也能像本地一样拖了就发；发送前可在浏览器内预览。仓库名为 `dsh-airdrop`，包名为 `dsh-universal-attachments`。MIT License。
 - **dsh-better-sidebar** — VSCode 风格的右侧边栏工作台：文件管理 / CodeMirror 编辑器 / 内嵌浏览器 / 真实终端（xterm.js + node-pty）/ Git 面板 / 后台任务页，并对外暴露 `ctx.betterSidebar` 服务供其他插件注册侧边栏 Tab 与文件预览器。MIT License。
 - **archify** — Agent Skill：把代码库或系统描述变成可交互的系统架构图（architecture / workflow / sequence / dataflow / lifecycle 五种图型），输出自包含 HTML + PNG/SVG/WebM。含 DeepSeek Harness 集成（`integrations/deepseek-harness`，以 `archify-skill-filesystem` Skill 形式接入）。MIT License。
 - **dsh-plugin-desktop (DSH Desktop)** — DSH 的 Electron 桌面应用，本身即一个 Cordis 插件。通过官方 deb 包安装。MIT License。
@@ -25,7 +27,7 @@
 本机存在**两个 harness 主目录**（home）：
 
 1. `~/.dsh` — dsh CLI 默认 home
-   - `desktop` profile：安装了 `dsh-better-sidebar`（即上表 #1）
+   - `desktop` profile：安装了 `dsh-better-sidebar` + `dsh-universal-attachments`（即上表 #1、#2）
    - `web` profile：无第三方插件
 2. `~/.local/share/ai.deepseek.harness.desk/harness` — DSH Desktop 桌面应用使用的 home（当前 GUI 正在使用）
    - `web` profile：安装了 `archify` + `dsh-better-sidebar`（即上表 #2，及 #1 的另一份拷贝）
@@ -46,12 +48,15 @@ sudo dpkg -i DSH-Desktop-2.0.1-amd64.deb
 # 3. dsh-better-sidebar 插件（装进 desktop profile）
 dsh plugin --profile desktop add github:omdsh-dev/DSH-better-sidebar
 
-# 4. archify 插件（装进 DSH Desktop 的 web profile）
+# 4. dsh-airdrop 附件拖拽插件（装进 desktop profile；包名 dsh-universal-attachments）
+dsh plugin --profile desktop add github:demacia1314/dsh-airdrop
+
+# 5. archify 插件（装进 DSH Desktop 的 web profile）
 dsh plugin --profile web add github:tt-a1i/archify
 # 若要装进 DSH Desktop 使用的 home，先设置：
 # export DSH_HOME=~/.local/share/ai.deepseek.harness.desk/harness
 
-# 5.（可选）恢复侧边栏浏览器 tab 设置 —— 在 DSH 设置里开启，或写入 settings.yaml：
+# 6.（可选）恢复侧边栏浏览器 tab 设置 —— 在 DSH 设置里开启，或写入 settings.yaml：
 # dsh-better-sidebar:
 #   tabsEnabled:
 #     browser: true
