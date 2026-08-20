@@ -1,34 +1,86 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DSH installed third-party plugins backup manifest",
-  "description": "第三方（非 DSH 内置）插件备份清单。内置 bundle（@deepseek-ai/dsh-base、@deepseek-ai/dsh-web-app 等）不含在内。",
+  "title": "DSH installed third-party plugins — source manifest",
+  "description": "第三方（非 DSH 内置）插件与组件的来源清单。只记录来源，不含源码。",
   "generatedAt": "2026-08-20",
-  "harnessHome": "~/.dsh",
-  "profiles": [
+  "plugins": [
     {
-      "name": "desktop",
-      "thirdPartyPlugins": [
+      "name": "dsh-better-sidebar",
+      "version": "0.14.0",
+      "kind": "dsh-plugin",
+      "source": "github:omdsh-dev/DSH-better-sidebar",
+      "sourceUrl": "https://github.com/omdsh-dev/DSH-better-sidebar",
+      "resolvedTarball": "https://codeload.github.com/omdsh-dev/DSH-better-sidebar/tar.gz/6c891514b544b6e2da51fdab2eb3436cc02da246",
+      "commit": "6c891514b544b6e2da51fdab2eb3436cc02da246",
+      "license": "MIT",
+      "installCommand": "dsh plugin --profile desktop add github:omdsh-dev/DSH-better-sidebar",
+      "installedAt": [
         {
-          "name": "dsh-better-sidebar",
-          "version": "0.14.0",
-          "source": "github:omdsh-dev/DSH-better-sidebar",
-          "sourceUrl": "https://github.com/omdsh-dev/DSH-better-sidebar",
-          "resolvedTarball": "https://codeload.github.com/omdsh-dev/DSH-better-sidebar/tar.gz/6c891514b544b6e2da51fdab2eb3436cc02da246",
-          "commit": "6c891514b544b6e2da51fdab2eb3436cc02da246",
-          "license": "MIT",
-          "description": "DSH web plugin: a VSCode-like right sidebar (explorer / editor / terminal / git / browser), isolated per conversation session.",
-          "snapshotPath": "./dsh-better-sidebar",
-          "settings": {
-            "tabsEnabled": {
-              "browser": true
-            }
-          }
+          "harnessHome": "~/.dsh",
+          "profile": "desktop"
+        },
+        {
+          "harnessHome": "~/.local/share/ai.deepseek.harness.desk/harness",
+          "profile": "web"
         }
-      ]
+      ],
+      "description": "VSCode-like right sidebar workbench (explorer / editor / terminal / git / browser).",
+      "settings": {
+        "tabsEnabled": {
+          "browser": true
+        }
+      }
     },
     {
-      "name": "web",
-      "thirdPartyPlugins": []
+      "name": "archify",
+      "version": "2.15.0",
+      "kind": "dsh-plugin (agent skill)",
+      "source": "github:tt-a1i/archify",
+      "sourceUrl": "https://github.com/tt-a1i/archify",
+      "resolvedTarball": "https://codeload.github.com/tt-a1i/archify/tar.gz/82e63c9ec3cc169b87d2829faae061f3dac8dba1",
+      "commit": "82e63c9ec3cc169b87d2829faae061f3dac8dba1",
+      "license": "MIT",
+      "installCommand": "dsh plugin --profile web add github:tt-a1i/archify",
+      "installedAt": [
+        {
+          "harnessHome": "~/.local/share/ai.deepseek.harness.desk/harness",
+          "profile": "web"
+        }
+      ],
+      "description": "JSON-IR diagram renderers (architecture / workflow / sequence / dataflow / lifecycle); DSH integration registers the archify skill filesystem."
+    },
+    {
+      "name": "dsh-plugin-desktop",
+      "displayName": "DSH Desktop",
+      "version": "2.0.1",
+      "kind": "electron-app (cordis plugin)",
+      "source": "github:anywhere-labs/deepseek-harness-desktop",
+      "sourceUrl": "https://github.com/anywhere-labs/deepseek-harness-desktop",
+      "releaseAsset": "DSH-Desktop-2.0.1-amd64.deb",
+      "license": "MIT",
+      "installCommand": "sudo dpkg -i DSH-Desktop-2.0.1-amd64.deb",
+      "installedAt": [
+        {
+          "path": "~/.local/opt/DSH Desktop"
+        }
+      ],
+      "description": "DSH Desktop: an Electron shell composed as a DeepSeek Harness Cordis plugin."
+    },
+    {
+      "name": "@deepseek-ai/dsh",
+      "displayName": "dsh CLI",
+      "version": "0.1.0-rc.7",
+      "kind": "cli",
+      "source": "npm:@deepseek-ai/dsh",
+      "sourceUrl": "https://www.npmjs.com/package/@deepseek-ai/dsh",
+      "license": "MIT",
+      "installCommand": "npm install -g @deepseek-ai/dsh",
+      "installedAt": [
+        {
+          "path": "~/.local/lib/node_modules/@deepseek-ai/dsh"
+        }
+      ],
+      "description": "dsh CLI: profile boot, plugin management, and the browser UI alias."
     }
   ]
 }
