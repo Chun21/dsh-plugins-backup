@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DSH installed third-party plugins backup manifest",
+  "description": "第三方（非 DSH 内置）插件备份清单。内置 bundle（@deepseek-ai/dsh-base、@deepseek-ai/dsh-web-app 等）不含在内。",
+  "generatedAt": "2026-08-20",
+  "harnessHome": "~/.dsh",
+  "profiles": [
+    {
+      "name": "desktop",
+      "thirdPartyPlugins": [
+        {
+          "name": "dsh-better-sidebar",
+          "version": "0.14.0",
+          "source": "github:omdsh-dev/DSH-better-sidebar",
+          "sourceUrl": "https://github.com/omdsh-dev/DSH-better-sidebar",
+          "resolvedTarball": "https://codeload.github.com/omdsh-dev/DSH-better-sidebar/tar.gz/6c891514b544b6e2da51fdab2eb3436cc02da246",
+          "commit": "6c891514b544b6e2da51fdab2eb3436cc02da246",
+          "license": "MIT",
+          "description": "DSH web plugin: a VSCode-like right sidebar (explorer / editor / terminal / git / browser), isolated per conversation session.",
+          "snapshotPath": "./dsh-better-sidebar",
+          "settings": {
+            "tabsEnabled": {
+              "browser": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "web",
+      "thirdPartyPlugins": []
+    }
+  ]
+}
